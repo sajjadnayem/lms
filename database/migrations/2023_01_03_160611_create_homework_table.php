@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('name');
             $table->text('description');
             $table->unsignedBigInteger('curriculum_id')->default(0);
-            $table->text('exam_id')->default(0);
+            $table->unsignedBigInteger('exam_id')->default(0);
+            $table->unsignedBigInteger('user_id');
             $table->text('link');
-            $table->string('user_id');
             $table->timestamps();
 
             $table->foreign('curriculum_id')->references('id')->on('curriculums')->onDelete('cascade');

@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('curriculams', function (Blueprint $table) {
+        Schema::create('curriculums', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('number');
             $table->unsignedBigInteger('course_id');
