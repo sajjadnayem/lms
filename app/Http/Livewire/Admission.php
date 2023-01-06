@@ -3,7 +3,11 @@
 namespace App\Http\Livewire;
 
 use App\Models\Course;
+use App\Models\Invoice;
+use App\Models\InvoiceItem;
 use App\Models\Lead;
+use App\Models\User;
+use Illuminate\Support\Str;
 use Livewire\Component;
 
 class Admission extends Component
@@ -31,5 +35,36 @@ class Admission extends Component
     public function courseSelected()
     {
         $this->selectedCourse = Course::find($this->course_id);
+    }
+    public function admit()
+    {
+         $lead = Lead::findorFail($this->lead_id);
+        $user = User::create([
+            'name' => $lead->name,
+            'email' => $lead->email,
+            'password' => str::random(8),
+        ]);
+
+        $lead->delete();
+        $invoice = Invoice::create([
+           'due_date' => now()->addDays(7),
+              'user_id' => $user->id,
+
+        ]);
+
+        $invoiceItem = InvoiceItem::create([
+            'name' => 'Course:' . $this->selectedCourse->name,
+            'price' => $this->selectedCourse->price,
+            'quantity' => 1,
+            'invoice_id' => $invoice->id,
+        ]);
+
+        $this->selectedCourse = null;
+        $this->course_id = null;
+        $this->lead_id = null;
+        $this->search = null;
+        $this->leads = [];
+
+         flash()->addSuccess('Admission Successful');
     }
 }
