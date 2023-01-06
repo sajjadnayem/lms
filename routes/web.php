@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdmissionController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
@@ -35,7 +36,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('user', UserController::class);
     Route::resource('role', RoleController::class);
 
+
     Route::get('/admission', [AdmissionController::class, 'admission'])->name('admission');
+    Route::get('/invoices', [InvoiceController::class, 'index'])->name('invoice-index');
 
 
 });
