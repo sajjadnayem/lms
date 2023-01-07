@@ -28,14 +28,28 @@ class InvoiceController extends Controller
             ],
         ]);
 
+        $item = [];
+        foreach ($DBinvoice->items as $item) {
+            $items[] = (new InvoiceItem())->title($item->name)->pricePerUnit($item->price)->quantity($item->quantity);
+        }
+
+        // payments
+        foreach($DBinvoice->payments as $payment) {
+            $items[] = (new InvoiceItem())->title('Payment')->pricePerUnit(-$payment->amount)->quantity(1);
+        }
+
+
+
         $item = (new InvoiceItem())->title('Service 1')->pricePerUnit(2);
 
         $invoice = Invoice::make()
             ->buyer($customer)
-            ->discountByPercent(10)
-            ->taxRate(15)
-            ->shipping(1.99)
-            ->addItem($item);
+            ->addItems($items)
+            ->currencySymbol('$')
+            ->currencyCode('USD')
+            ->currencyFormat('{SYMBOL}{VALUE}')
+            ->currencyThousandsSeparator('.')
+            ->currencyDecimalPoint(',');
 
         return $invoice->stream();
     }
