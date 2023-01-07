@@ -20,7 +20,7 @@
                 <td class="border px-4 py-2 text-center">
                     <div class="flex items-center justify-center">
                         <a href="">@include('components.icons.edit')</a>
-                        <a class="px-2" href="">@include('components.icons.view')</a>
+                        <a class="px-2" href="{{route('invoice-show', $invoice->id)}}">@include('components.icons.view')</a>
                         <form onsubmit="return confirm('Are you Sure?');" wire:submit.prevent="invoiceDelete({{$invoice->id}})">
                             @csrf
                             @method('DELETE')
