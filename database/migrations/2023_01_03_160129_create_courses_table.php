@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('description');
             $table->unsignedBigInteger('user_id');
             $table->float('price')->default(0);
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

@@ -8,6 +8,12 @@ use mysql_xdevapi\Table;
 
 class Curriculum extends Model
 {
+    protected $fillable = [
+        'course_id',
+        'day',
+        'time',
+        'end_date',
+    ];
     protected $table = 'curriculums';
     use HasFactory;
     public function homeworks()
