@@ -10,8 +10,9 @@ class Curriculum extends Model
 {
     protected $fillable = [
         'course_id',
-        'day',
-        'time',
+        'name',
+        'week_day',
+        'class_time',
         'end_date',
     ];
     protected $table = 'curriculums';

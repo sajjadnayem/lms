@@ -1,33 +1,41 @@
-{{--<div>--}}
-{{--    <table class="w-full table-auto">--}}
-{{--        <tr>--}}
-{{--            <th class="border px-4 py-2 text-left">Name</th>--}}
-{{--            <th class="border px-4 py-2 text-left">Email</th>--}}
-{{--            <th class="border px-4 py-2 text-left">Phone</th>--}}
-{{--            <th class="border px-4 py-2">Registered</th>--}}
-{{--            <th class="border px-4 py-2">Action</th>--}}
-{{--        </tr>--}}
-{{--        @foreach($leads as $lead)--}}
-{{--            <tr>--}}
-{{--                <td class="border px-4 py-2">{{ $lead->name }}</td>--}}
-{{--                <td class="border px-4 py-2">{{ $lead->email }}</td>--}}
-{{--                <td class="border px-4 py-2">{{ $lead->phone }}</td>--}}
-{{--                <td class="border px-4 py- text-center">{{ date('F j, Y', strtotime($lead->created_at)) }}</td>--}}
-{{--                <td class="border px-4 py-2 text-center">--}}
-{{--                    <div class="flex items-center justify-center">--}}
-{{--                        <a href="{{ route('lead.edit', $lead->id) }}" >@include('components.icons.edit')</a>--}}
-{{--                        <a class="px-2" href="{{route('lead.show', $lead->id)}}">@include('components.icons.view')</a>--}}
-{{--                        <form onsubmit="return confirm('Are you Sure?');" wire:submit.prevent="leadDelete({{$lead->id}})">--}}
-{{--                            @csrf--}}
-{{--                            @method('DELETE')--}}
-{{--                            <button type="submit" >@include('components.icons.delete')</button>--}}
-{{--                        </form>--}}
-{{--                    </div>--}}
-{{--                </td>--}}
-{{--            </tr>--}}
-{{--        @endforeach--}}
-{{--    </table>--}}
-{{--    <div class="mt-4">--}}
-{{--        {{ $leads->links() }}--}}
-{{--    </div>--}}
-{{--</div>--}}
+<div>
+
+    <table class="w-full table-auto">
+        <tr>
+            <th class="border px-4 py-2 text-left">Id </th>
+            <th class="border px-4 py-2 text-left">Name </th>
+            <th class="border px-4 py-2 text-left">Description </th>
+            <th class="border px-4 py-2 text-left">Price</th>
+            <th class="border px-4 py-2">Created at</th>
+            <th class="border px-4 py-2">Action</th>
+        </tr>
+
+        @foreach ($courses as $course)
+            <tr>tr>
+            <td class="border px-4 py-2">{{ $course->id }}</td>
+            <td class="border px-4 py-2">{{ $course->name }}</td>
+            <td class="border px-4 py-2">{{ $course->description }}</td>
+            <td class="border px-4 py-2">${{ $course->price }}</td>
+            <td class="border px-4 py-2 text-center">{{ date('Fj,Y',strtotime($course->created_at)) }}</td>
+            <td class="border px-4 py-2 text-center">
+                <div class="flex items-center justify-center">
+                    <a href="{{ route('course.edit',$course->id) }}">
+                        @include('components.icons.edit')
+                    </a>
+
+                    <a class="px-2" href="{{ route('course.show',$course->id) }}">
+                        @include('components.icons.view')
+                    </a>
+
+                    <form onsubmit="return confirm('Are you sure?');"
+                          wire:submit.prevent="courseDelete({{ $course->id }})">
+                        <button type="submit">
+                            @include('components.icons.delete')
+                        </button>
+                    </form>
+                </div>
+            </td>
+            </tr>
+        @endforeach
+    </table>
+</div>

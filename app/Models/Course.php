@@ -17,7 +17,7 @@ class Course extends Model
     ];
     public function curriculums()
     {
-        return $this->hasMany('Curriculum::class');
+        return $this->hasMany(Curriculum::class);
     }
 
     public function students()
