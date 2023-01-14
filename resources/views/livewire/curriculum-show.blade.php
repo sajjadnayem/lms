@@ -6,7 +6,7 @@
 
     <h2 class="font-bold mb-2">Class</h2>
     <p class="text-gray-600 mb-4"><span>Name: </span>{{$curriculum->name}}</p>
-{{--    <h2 class="font-bold mb-2">Students - Present - {{$curriculum->presentStudents()}} | Absent {{$curriculum->course->students()->count() - $curriculum->presentStudents()}}</h2>--}}
+    <h2 class="font-bold mb-2">Students - Present-{{$curriculum->presentStudents()}} | Absent-{{$curriculum->course->students()->count() - $curriculum->presentStudents()}}</h2>
     <table class="w-full table-auto">
         <tr>
             <th class="border px-4 py-2 text-left">Name</th>
@@ -23,7 +23,7 @@
                         @if($student->is_present($curriculum->id))
                             Presented
                         @else
-                            <button wire:click="attendance({{$student->id}})" class="py-2 px-3 bg-green-500 text-white">Present</button>
+                            <button wire:click="attendance({{$student->id}})">@include('components.icons.check')</button>
                         @endif
                     </div>
                 </td>

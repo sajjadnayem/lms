@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Attendence;
 use App\Models\Curriculum;
 use App\Models\Note;
 use Livewire\Component;
@@ -31,5 +32,13 @@ class CurriculumShow extends Component
         $curriculum->notes()->attach($note->id);
         $this->note = '';
         flash()->addSuccess('Note added successfully!');
+    }
+    public function attendance($student_id)
+    {
+        Attendence::create([
+            'curriculum_id' => $this->curriculum_id,
+            'user_id' => $student_id
+        ]);
+        flash()->addSuccess('Attendance added successfully!');
     }
 }
