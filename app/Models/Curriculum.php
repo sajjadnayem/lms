@@ -19,11 +19,18 @@ class Curriculum extends Model
     use HasFactory;
     public function homeworks()
     {
-        return $this->hasMany('Homework::class');
+        return $this->hasMany(Homework::class);
     }
     public function attendences()
     {
-        return $this->hasMany('Attendance::class');
-
+        return $this->hasMany(Attendence::class);
+    }
+    public function notes()
+    {
+        return $this->belongsToMany(Note::class, 'curriculum_note');
+    }
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
     }
 }
